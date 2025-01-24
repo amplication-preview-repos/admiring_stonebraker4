@@ -27,6 +27,9 @@ export class DocumentsControllerBase {
   constructor(protected readonly service: DocumentsService) {}
   @common.Post()
   @swagger.ApiCreatedResponse({ type: Documents })
+  @swagger.ApiBody({
+    type: DocumentsCreateInput,
+  })
   async createDocuments(
     @common.Body() data: DocumentsCreateInput
   ): Promise<Documents> {
@@ -80,6 +83,9 @@ export class DocumentsControllerBase {
   @common.Patch("/:id")
   @swagger.ApiOkResponse({ type: Documents })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
+  @swagger.ApiBody({
+    type: DocumentsUpdateInput,
+  })
   async updateDocuments(
     @common.Param() params: DocumentsWhereUniqueInput,
     @common.Body() data: DocumentsUpdateInput

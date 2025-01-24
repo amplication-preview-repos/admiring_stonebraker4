@@ -27,6 +27,9 @@ export class KpiControllerBase {
   constructor(protected readonly service: KpiService) {}
   @common.Post()
   @swagger.ApiCreatedResponse({ type: Kpi })
+  @swagger.ApiBody({
+    type: KpiCreateInput,
+  })
   async createKpi(@common.Body() data: KpiCreateInput): Promise<Kpi> {
     return await this.service.createKpi({
       data: data,
@@ -76,6 +79,9 @@ export class KpiControllerBase {
   @common.Patch("/:id")
   @swagger.ApiOkResponse({ type: Kpi })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
+  @swagger.ApiBody({
+    type: KpiUpdateInput,
+  })
   async updateKpi(
     @common.Param() params: KpiWhereUniqueInput,
     @common.Body() data: KpiUpdateInput

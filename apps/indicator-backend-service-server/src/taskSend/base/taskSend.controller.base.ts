@@ -27,6 +27,9 @@ export class TaskSendControllerBase {
   constructor(protected readonly service: TaskSendService) {}
   @common.Post()
   @swagger.ApiCreatedResponse({ type: TaskSend })
+  @swagger.ApiBody({
+    type: TaskSendCreateInput,
+  })
   async createTaskSend(
     @common.Body() data: TaskSendCreateInput
   ): Promise<TaskSend> {
@@ -80,6 +83,9 @@ export class TaskSendControllerBase {
   @common.Patch("/:id")
   @swagger.ApiOkResponse({ type: TaskSend })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
+  @swagger.ApiBody({
+    type: TaskSendUpdateInput,
+  })
   async updateTaskSend(
     @common.Param() params: TaskSendWhereUniqueInput,
     @common.Body() data: TaskSendUpdateInput

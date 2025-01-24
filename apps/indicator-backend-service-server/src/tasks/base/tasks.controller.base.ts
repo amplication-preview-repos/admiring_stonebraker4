@@ -27,6 +27,9 @@ export class TasksControllerBase {
   constructor(protected readonly service: TasksService) {}
   @common.Post()
   @swagger.ApiCreatedResponse({ type: Tasks })
+  @swagger.ApiBody({
+    type: TasksCreateInput,
+  })
   async createTasks(@common.Body() data: TasksCreateInput): Promise<Tasks> {
     return await this.service.createTasks({
       data: data,
@@ -78,6 +81,9 @@ export class TasksControllerBase {
   @common.Patch("/:id")
   @swagger.ApiOkResponse({ type: Tasks })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
+  @swagger.ApiBody({
+    type: TasksUpdateInput,
+  })
   async updateTasks(
     @common.Param() params: TasksWhereUniqueInput,
     @common.Body() data: TasksUpdateInput

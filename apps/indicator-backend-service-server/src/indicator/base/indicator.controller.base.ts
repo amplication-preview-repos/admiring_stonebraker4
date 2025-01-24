@@ -27,6 +27,9 @@ export class IndicatorControllerBase {
   constructor(protected readonly service: IndicatorService) {}
   @common.Post()
   @swagger.ApiCreatedResponse({ type: Indicator })
+  @swagger.ApiBody({
+    type: IndicatorCreateInput,
+  })
   async createIndicator(
     @common.Body() data: IndicatorCreateInput
   ): Promise<Indicator> {
@@ -80,6 +83,9 @@ export class IndicatorControllerBase {
   @common.Patch("/:id")
   @swagger.ApiOkResponse({ type: Indicator })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
+  @swagger.ApiBody({
+    type: IndicatorUpdateInput,
+  })
   async updateIndicator(
     @common.Param() params: IndicatorWhereUniqueInput,
     @common.Body() data: IndicatorUpdateInput

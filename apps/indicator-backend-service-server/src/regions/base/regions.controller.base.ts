@@ -27,6 +27,9 @@ export class RegionsControllerBase {
   constructor(protected readonly service: RegionsService) {}
   @common.Post()
   @swagger.ApiCreatedResponse({ type: Regions })
+  @swagger.ApiBody({
+    type: RegionsCreateInput,
+  })
   async createRegions(
     @common.Body() data: RegionsCreateInput
   ): Promise<Regions> {
@@ -80,6 +83,9 @@ export class RegionsControllerBase {
   @common.Patch("/:id")
   @swagger.ApiOkResponse({ type: Regions })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
+  @swagger.ApiBody({
+    type: RegionsUpdateInput,
+  })
   async updateRegions(
     @common.Param() params: RegionsWhereUniqueInput,
     @common.Body() data: RegionsUpdateInput
